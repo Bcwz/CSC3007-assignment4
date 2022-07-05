@@ -76,7 +76,13 @@
                     "<br> Vaccinated: " + d.vaccinated
                     )
                     .style("position", "absolute")
-                    .style("background", "#fff")
+                    .style("background",function(){
+                        if(d.gender=='male'){
+                            return "#ADD8E6"
+                        }else{
+                            return "#FFB6C1"
+                        }
+                    })
                     .style("border-radius", "5px")
                     .style("left", (event.pageX -10) + "px")
                     .style("top", (event.pageY +10) + "px");
@@ -153,7 +159,8 @@
                 }
             }
         }
-        function genderImage (gender){
+        function tooltipColour (gender){
+            console.log(gender)
             for (let i=0; i<=gender.length;i++){
                 if (gender == "male"){
                     return "male.svg"
