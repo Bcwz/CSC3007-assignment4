@@ -5,6 +5,7 @@
         <style></style>
     </head>
 <body>
+    <h1>Covid Tracing in Singapore</h1>
     <svg></svg>
     <div class="tooltip"></div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -55,25 +56,30 @@
             .append("circle")
                 .attr("r", 50)
                 .style("fill", d=>genderColor(d.gender))
-            .on('mouseover', (event,d)=>{
+            .on('mouseover', function(event,d){
                 //console.log(d)
                 d3.select(".tooltip")
-                .html("Gender: " + d.gender +
-                "<br> Age:" + d.age +
-                "<br> Nationality:" + d.nationality +
-                "<br> Occupation:" + d.occupation +
-                "<br> serology:" + d.serology +
-                "<br> Vaccinated:" + d.vaccinated
-                )
-                .style("position", "absolute")
-                .style("background", "gray")
-                .style("border-radius", "5px")
-                .style("left", (event.pageX -10) + "px")
-                .style("top", (event.pageY +10) + "px");
+                    .html("Gender: " + d.gender +
+                    "<br> Age:" + d.age +
+                    "<br> Nationality:" + d.nationality +
+                    "<br> Occupation:" + d.occupation +
+                    "<br> serology:" + d.serology +
+                    "<br> Vaccinated:" + d.vaccinated
+                    )
+                    .style("position", "absolute")
+                    .style("background", "gray")
+                    .style("border-radius", "5px")
+                    .style("left", (event.pageX -10) + "px")
+                    .style("top", (event.pageY +10) + "px");
+                d3.select(this).transition()
+                    .style('stroke', 'red')
+                    .style('stroke-width', '1rem'); 
             })
-            .on("mouseout", (event, d) => {
+            .on("mouseout", function(event, d) {
                 d3.select(".tooltip")
-                .text("");
+                    .text("");
+                d3.select(this).transition()
+                    .style('stroke', ''); 
             })
             .call(d3.drag()
                 .on("start", dragstarted)
