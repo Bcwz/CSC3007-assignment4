@@ -6,7 +6,18 @@
     </head>
 <body>
     <svg></svg>
+    <div class="tooltip"></div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <svg>
+        <filter id="male" x="0%" y="0%" width="100%" height="100%">
+          <feImage xlink:href="male.svg" />
+        </filter>
+
+        <filter id="female" x="0%" y="0%" width="100%" height="100%">
+            <feImage xlink:href="female.svg" />
+        </filter>
+      </svg>
 
     <script>
 
@@ -44,6 +55,26 @@
             .append("circle")
                 .attr("r", 50)
                 .style("fill", d=>genderColor(d.gender))
+            .on('mouseover', (event,d)=>{
+                //console.log(d)
+                d3.select(".tooltip")
+                .html("Gender: " + d.gender +
+                "<br> Age:" + d.age +
+                "<br> Nationality:" + d.nationality +
+                "<br> Occupation:" + d.occupation +
+                "<br> serology:" + d.serology +
+                "<br> Vaccinated:" + d.vaccinated
+                )
+                .style("position", "absolute")
+                .style("background", "gray")
+                .style("border-radius", "5px")
+                .style("left", (event.pageX -10) + "px")
+                .style("top", (event.pageY +10) + "px");
+            })
+            .on("mouseout", (event, d) => {
+                d3.select(".tooltip")
+                .text("");
+            })
             .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
