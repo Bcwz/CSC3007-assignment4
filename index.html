@@ -83,14 +83,14 @@
                 d3.select(this).transition()
                     .style('stroke', 'red')
                     .style('stroke-width', '1rem')
-                    .attr("r",150);
+                    .attr("r",100);
             })
             .on("mouseout", function(event, d) {
                 d3.select(".tooltip")
                     .text("");
                 d3.select(this).transition()
                     .style('stroke', '')
-                    .attr("r",50);; 
+                    .attr("r",50);
             })
             .call(d3.drag()
                 .on("start", dragstarted)
